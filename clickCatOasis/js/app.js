@@ -50,6 +50,9 @@ const hasCookieConsent = getCookie('cookies-consent');
 
 if (!hasCookieConsent) {
     cookieBanner.classList.remove('hidden');
+} else {
+    // They had previously consented, so log right away.
+    acceptedLogVisit();
 }
 
 const consentCta = cookieBanner.querySelector('#consent-cookies');
@@ -57,6 +60,8 @@ const consentCta = cookieBanner.querySelector('#consent-cookies');
 consentCta.addEventListener('click', () => {
     cookieBanner.classList.add('hidden');
     setCookie('cookies-consent', 1, 365);
+    // They consent now, so log this visit.
+    acceptedLogVisit();
 });
 
 let cattery = {
